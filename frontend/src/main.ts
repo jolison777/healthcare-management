@@ -1,1 +1,2 @@
-import { bootstrapApplication } from '@angular/platform-browser'; import { AppComponent } from './app/app.component'; bootstrapApplication(AppComponent).catch(err=>console.error(err));
+import {bootstrapApplication} from '@angular/platform-browser'; import {provideHttpClient,withInterceptorsFromDi} from '@angular/common/http'; import {HTTP_INTERCEPTORS} from '@angular/common/http'; import {AppComponent} from './app/app.component'; import {AuthInterceptor} from './app/core/auth.interceptor';
+bootstrapApplication(AppComponent,{providers:[provideHttpClient(withInterceptorsFromDi()),{provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}]}).catch(console.error);
